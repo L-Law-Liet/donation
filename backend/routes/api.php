@@ -1,6 +1,16 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CampaignController;
+use App\Http\Controllers\CardController;
+use App\Http\Controllers\DonorController;
+use App\Http\Controllers\EmailController;
+use App\Http\Controllers\FieldController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\PhoneController;
+use App\Http\Controllers\ReasonController;
+use App\Http\Controllers\SourceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +31,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => ['guest']], function () {
     Route::post('login', [AuthController::class, 'login']);
+});
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::apiResources([
+        'addresses' => AddressController::class,
+        'campaigns' => CampaignController::class,
+        'cards' => CardController::class,
+        'donors' => DonorController::class,
+        'emails' => EmailController::class,
+        'fields' => FieldController::class,
+        'locations' => LocationController::class,
+        'phones' => PhoneController::class,
+        'reasons' => ReasonController::class,
+        'sources' => SourceController::class,
+    ]);
 });
