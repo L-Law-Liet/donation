@@ -6,6 +6,7 @@ use App\Models\Campaign;
 use App\Models\Donor;
 use App\Models\Location;
 use App\Models\Reason;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -28,6 +29,7 @@ class SourceFactory extends Factory
             'campaign_id' => Campaign::inRandomOrder()->first()->id,
             'location_id' => Location::inRandomOrder()->first()->id,
             'collector_id' => Donor::collector()->inRandomOrder()->first()->id,
+            'user_id' => User::first()->id,
         ];
     }
 }

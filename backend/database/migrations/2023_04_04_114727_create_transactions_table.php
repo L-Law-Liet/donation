@@ -34,7 +34,10 @@ return new class extends Migration
                 ->cascadeOnUpdate()->nullOnDelete();
             $table->foreignId('card_id')->nullable()->constrained()
                 ->cascadeOnUpdate()->nullOnDelete();
-            $table->timestamps();
+            $table->foreignId('user_id')->constrained()
+                ->cascadeOnUpdate()->cascadeOnDelete();
+            $table->softDeletes();
+$table->timestamps();
         });
     }
 

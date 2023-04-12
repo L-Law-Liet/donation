@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Campaign;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -23,6 +24,7 @@ class CampaignFactory extends Factory
             'friendly_name' => Str::random(4),
             'above' => fake()->randomFloat(2, 10, 1000),
             'campaign_id' => Campaign::find(rand(1, 40))?->id,
+            'user_id' => User::first()->id,
         ];
     }
 }

@@ -8,6 +8,7 @@ use App\Models\Donor;
 use App\Models\Location;
 use App\Models\Reason;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -59,6 +60,7 @@ class TransactionFactory extends Factory
             'donor_id' => $donor->id,
             'collector_id' => Donor::collector()->inRandomOrder()->first()->id,
             'card_id' => $card_id,
+            'user_id' => User::first()->id,
         ];
     }
 }

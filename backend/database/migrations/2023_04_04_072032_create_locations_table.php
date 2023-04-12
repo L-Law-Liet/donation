@@ -21,7 +21,11 @@ return new class extends Migration
             $table->string('city_state_zip')->nullable();
             $table->string('rabbi')->nullable();
             $table->string('phone')->nullable();
-            $table->timestamps();
+
+            $table->foreignId('user_id')->constrained()
+                ->cascadeOnUpdate()->cascadeOnDelete();
+            $table->softDeletes();
+$table->timestamps();
         });
     }
 

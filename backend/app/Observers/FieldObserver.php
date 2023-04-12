@@ -12,7 +12,6 @@ class FieldObserver
         if (!$field->options) {
             $field->options = [];
         }
-        dd(1);
     }
 
     /**

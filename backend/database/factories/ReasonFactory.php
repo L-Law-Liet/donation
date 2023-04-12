@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Campaign;
 use App\Models\Reason;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -31,6 +32,7 @@ class ReasonFactory extends Factory
             'goal' => fake()->randomFloat(2, 100, 10000),
             'campaign_id' => Campaign::inRandomOrder()->first()->id,
             'reason_id' => Reason::find(rand(1, 100))?->id,
+            'user_id' => User::first()->id,
         ];
     }
 }

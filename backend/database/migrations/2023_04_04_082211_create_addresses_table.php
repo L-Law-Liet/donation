@@ -24,7 +24,8 @@ return new class extends Migration
 
             $table->foreignId('donor_id')->constrained()
                 ->cascadeOnDelete()->cascadeOnUpdate();
-            $table->timestamps();
+            $table->softDeletes();
+$table->timestamps();
         });
     }
 

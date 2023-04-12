@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Donor;
+use App\Models\User;
 use Faker\Provider\en_US\Address;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -43,6 +44,7 @@ class DonorFactory extends Factory
             ],
             'child_id' => Donor::donor()->find(rand(1, 100))?->id,
             'pair_id' => Donor::donor()->find(rand(1, 100))?->id,
+            'user_id' => User::first()->id,
         ];
     }
 }

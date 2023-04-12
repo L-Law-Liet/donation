@@ -28,7 +28,10 @@ return new class extends Migration
                 ->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('pair_id')->nullable()->constrained('donors')
                 ->cascadeOnDelete()->cascadeOnUpdate();
-            $table->timestamps();
+            $table->foreignId('user_id')->constrained()
+                ->cascadeOnUpdate()->cascadeOnDelete();
+            $table->softDeletes();
+$table->timestamps();
         });
     }
 

@@ -13,9 +13,6 @@ class IndexRequest extends ApiRequest
      */
     public function rules(): array
     {
-        dd(1);
-        return [
-            'gg' => ['required'],
-        ];
+        return [];
     }
 }

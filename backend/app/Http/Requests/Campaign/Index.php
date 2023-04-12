@@ -3,6 +3,9 @@
 namespace App\Http\Requests\Campaign;
 
 use App\Http\Requests\Api\IndexRequest;
+use App\Models\Campaign;
+use App\Services\CampaignService;
+use Illuminate\Validation\Rule;
 
 class Index extends IndexRequest
 {
@@ -13,9 +16,12 @@ class Index extends IndexRequest
      */
     public function rules(): array
     {
-        dd(1);
         return [
-            'gg' => ['required'],
+            'filter.name' => ['string', 'max:255'],
+            'filter.friendly_name' => ['string', 'max:255'],
+            'filter.status' => [Rule::in(CampaignService::STATUSES)],
+            'sort' => [Rule::in(CampaignService::SORT)],
+            'per_page' => ['integer', 'min:1'],
         ];
     }
 }

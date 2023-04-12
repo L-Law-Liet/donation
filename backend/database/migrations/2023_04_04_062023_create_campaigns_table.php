@@ -14,12 +14,16 @@ return new class extends Migration
         Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedInteger('num')->nullable();
             $table->string('friendly_name')->nullable();
             $table->decimal('above')->nullable();
 
             $table->foreignId('campaign_id')->nullable()->constrained()
                 ->cascadeOnUpdate()->cascadeOnDelete();
-            $table->timestamps();
+            $table->foreignId('user_id')->constrained()
+                ->cascadeOnUpdate()->cascadeOnDelete();
+            $table->softDeletes();
+$table->timestamps();
         });
     }
 

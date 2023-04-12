@@ -25,7 +25,10 @@ return new class extends Migration
                 ->cascadeOnUpdate()->nullOnDelete();
             $table->foreignId('collector_id')->nullable()->constrained('donors')
                 ->cascadeOnUpdate()->nullOnDelete();
-            $table->timestamps();
+            $table->foreignId('user_id')->constrained()
+                ->cascadeOnUpdate()->cascadeOnDelete();
+            $table->softDeletes();
+$table->timestamps();
         });
     }
 

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Location;
+use App\Models\User;
 use Faker\Provider\en_US\Address;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -29,6 +30,7 @@ class LocationFactory extends Factory
             'city_state_zip' => implode(' ', [fake()->city, Address::stateAbbr(), fake()->postcode]),
             'rabbi' => Str::limit(8),
             'phone' => fake()->phoneNumber,
+            'user_id' => User::first()->id,
         ];
     }
 }

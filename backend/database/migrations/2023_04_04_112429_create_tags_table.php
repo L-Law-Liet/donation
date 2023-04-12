@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('color');
-            $table->timestamps();
+
+            $table->foreignId('user_id')->constrained()
+                ->cascadeOnUpdate()->cascadeOnDelete();
+            $table->softDeletes();
+$table->timestamps();
         });
     }
 

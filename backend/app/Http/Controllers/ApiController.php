@@ -5,17 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Api\IndexRequest;
 use App\Http\Requests\Api\StoreRequest;
 use App\Http\Requests\Api\UpdateRequest;
-use App\Http\Resources\ApiResource;
 use App\Services\ApiService;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
+
 abstract class ApiController extends Controller
 {
     protected ApiService $service;
 
     public function __construct()
     {
-        app()->singleton(ApiService::class, $this->service());
         app()->bind(Model::class, $this->model());
+        $this->service = new ($this->service())(app($this->model()));
         app()->bind(IndexRequest::class, $this->indexRequest());
         app()->bind(StoreRequest::class, $this->storeRequest());
         app()->bind(UpdateRequest::class, $this->updateRequest());
@@ -23,16 +24,19 @@ abstract class ApiController extends Controller
 
     abstract protected function model(): string;
     abstract protected function service(): string;
+//    abstract protected function resource(): string;
     abstract protected function storeRequest(): string;
     abstract protected function updateRequest(): string;
     abstract protected function indexRequest(): string;
 
     /**
-     * Display a listing of the resource.
+     * @param IndexRequest $request
+     * @return JsonResponse
      */
-    public function index(IndexRequest $request)
+    public function index(IndexRequest $request): JsonResponse
     {
-        return $this->service->all();
+        $this->service->setParams($request->validated());
+        return response()->json($this->service->all());
     }
 
     /**
@@ -41,16 +45,16 @@ abstract class ApiController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        dd(1);
+
     }
 
     /**
-     * @param Model $model
-     * @return void
+     * @param string $id
+     * @return JsonResponse
      */
-    public function show(Model $model)
+    public function show(string $id): JsonResponse
     {
-        dd($model);
+        return response()->json($this->service->show($id));
     }
 
     /**

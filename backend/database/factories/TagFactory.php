@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +20,7 @@ class TagFactory extends Factory
         return [
             'title' => fake()->words(rand(2, 3), true),
             'color' => fake()->hexColor,
+            'user_id' => User::first()->id,
         ];
     }
 }

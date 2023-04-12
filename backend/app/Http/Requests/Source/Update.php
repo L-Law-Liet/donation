@@ -13,7 +13,7 @@ class Update extends UpdateRequest
      */
     public function rules(): array
     {
-        dd(1);
+
         return [
             'gg' => ['required'],
         ];

@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Campaign;
 use App\Models\Donor;
 use App\Models\Field;
+use App\Observers\CampaignObserver;
 use App\Observers\DonorObserver;
 use App\Observers\FieldObserver;
 use Illuminate\Auth\Events\Registered;
@@ -27,6 +29,7 @@ class EventServiceProvider extends ServiceProvider
     protected $observers = [
         Donor::class => [DonorObserver::class],
         Field::class => [FieldObserver::class],
+        Campaign::class => [CampaignObserver::class],
     ];
 
     /**
