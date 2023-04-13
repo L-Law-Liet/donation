@@ -23,7 +23,7 @@ class DonorSeeder extends Seeder
             ->has(Address::factory(rand(2, 4)))
             ->has(Phone::factory(rand(2, 4)))
             ->has(Email::factory(rand(2, 4)))
-            ->has(Field::factory(rand(0, 2)))
+            ->has(Field::factory(rand(0, 5)))
             ->has(Card::factory(rand(1, 2)))
             ->has(Tag::factory(rand(1, 3)))
             ->create();

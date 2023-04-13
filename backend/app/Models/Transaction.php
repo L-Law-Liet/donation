@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Transaction extends Model
@@ -26,6 +27,25 @@ class Transaction extends Model
         'pledge' => 'pledge',
         'wallet' => 'wallet',
         'other' => 'other',
+    ];
+
+    const STATUSES = [
+        'Success' => 'Success',
+        'Error' => 'Error',
+        'Declined' => 'Declined',
+        'Voided' => 'Voided',
+        'Refunded' => 'Refunded',
+        'Processing' => 'Processing',
+        'Deleted' => 'Deleted',
+        'Requested' => 'Requested',
+    ];
+
+    const PLEDGE_STATUSES = [
+      'Open' => 'Open',
+      'Partially Paid' => 'Partially Paid',
+      'Paid' => 'Paid',
+      'Voided' => 'Voided',
+      'Running' => 'Running',
     ];
 
     /**
@@ -74,5 +94,21 @@ class Transaction extends Model
     public function card(): BelongsTo
     {
         return $this->belongsTo(Card::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function transaction(): BelongsTo
+    {
+        return $this->belongsTo(Transaction::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
     }
 }

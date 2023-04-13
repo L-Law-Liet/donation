@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Donor extends Model
@@ -53,6 +54,30 @@ class Donor extends Model
     public function child(): BelongsTo
     {
         return $this->belongsTo(Donor::class, 'child_id');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function address(): HasOne
+    {
+        return $this->hasOne(Address::class)->where('primary', true);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function phone(): HasMany
+    {
+        return $this->hasMany(Phone::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function email(): HasMany
+    {
+        return $this->hasMany(Email::class);
     }
 
     /**

@@ -2,27 +2,24 @@
 
 namespace App\Services;
 
+use App\Http\Resources\CampaignCollection;
 use App\Http\Resources\CampaignResource;
 use App\Models\Campaign;
 use Illuminate\Database\Eloquent\Builder;
 
 class CampaignService extends ApiService
 {
-
-    const STATUSES = [
-        'Active' => 'Active',
-        'Inactive' => 'Inactive',
-        'All' => 'All',
-    ];
-
-    const SORT = [
-        'num',
-        'name',
-        'friendly_name',
-        '-num',
-        '-name',
-        '-friendly_name',
-    ];
+    public static function SORT(): array
+    {
+        return [
+            'num' => [['num'], 'asc'],
+            'name' => [['name'], 'asc'],
+            'friendly_name' => [['friendly_name'], 'asc'],
+            '-num' => [['num'], 'desc'],
+            '-name' => [['name'], 'desc'],
+            '-friendly_name' => [['friendly_name'], 'desc'],
+        ];
+    }
 
     protected function model(): string
     {
@@ -32,10 +29,19 @@ class CampaignService extends ApiService
     {
         return CampaignResource::class;
     }
-
-    protected function indexRels(): array
+    protected function collection(): string
     {
-        return ['campaign'];
+        return CampaignCollection::class;
+    }
+
+    protected function with(): array
+    {
+        return ['campaigns'];
+    }
+
+    protected function load(): array
+    {
+        return ['campaign', 'transactions'];
     }
 
     /**
@@ -44,9 +50,7 @@ class CampaignService extends ApiService
     protected function filters(): Builder
     {
         $q = parent::filters();
-        if (!isset($this->params['filter'])) {
-            return $q;
-        }
+        $q->whereNull('campaign_id');
         $filter = $this->params['filter'];
         if ($where = $filter['name'] ?? null) {
             $q->where('name', 'like', "%$where%");
@@ -54,29 +58,6 @@ class CampaignService extends ApiService
         if ($where = $filter['friendly_name'] ?? null) {
             $q->where('friendly_name', 'like', "%$where%");
         }
-        if (self::STATUSES['All'] == $filter['status'] ?? null) {
-            $q->withTrashed();
-        } elseif (self::STATUSES['Inactive'] == $filter['status'] ?? null) {
-            $q->onlyTrashed();
-        }
         return $q;
     }
-
-    /**
-     * @return Builder
-     */
-    protected function sorts(): Builder
-    {
-        $q = $this->filters();
-        if ($sort = $this->params['sort'] ?? null) {
-            if (str_contains($sort, '-')) {
-                $sort = str_replace('-', '', $sort);
-                $q->orderBy($sort, 'desc');
-            } else {
-                $q->orderBy($sort);
-            }
-        }
-        return $q;
-    }
-
 }

@@ -12,13 +12,13 @@ class Field extends Model
     use HasFactory;
     use SoftDeletes;
 
-    const TYPE_TEXT = 'Text Field';
+    const TYPE_TEXT = 'Text';
     const TYPE_DROPDOWN = 'Dropdown';
 
     protected $guarded = [];
 
     protected $casts = [
-        'options' => 'object',
+        'options' => 'array',
     ];
 
     /**

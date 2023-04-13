@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('type');
             $table->boolean('primary')->default(false);
-            $table->string('country')->nullable();
+            $table->string('state')->nullable();
             $table->string('city')->nullable();
             $table->string('zip')->nullable();
             $table->string('street')->nullable();

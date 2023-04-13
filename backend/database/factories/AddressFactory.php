@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Address;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Faker\Provider\en_US\Address as StateAddress;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Address>
@@ -23,7 +24,7 @@ class AddressFactory extends Factory
         return [
             'type' => fake()->randomElement([Address::TYPE_HOME, Address::TYPE_WORK]),
             'primary' => $this->i++ < 1,
-            'country' => fake()->country,
+            'state' => StateAddress::stateAbbr(),
             'city' => fake()->city,
             'zip' => fake()->postcode,
             'street' => fake()->address,

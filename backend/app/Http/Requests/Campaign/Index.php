@@ -16,12 +16,9 @@ class Index extends IndexRequest
      */
     public function rules(): array
     {
-        return [
-            'filter.name' => ['string', 'max:255'],
-            'filter.friendly_name' => ['string', 'max:255'],
-            'filter.status' => [Rule::in(CampaignService::STATUSES)],
-            'sort' => [Rule::in(CampaignService::SORT)],
-            'per_page' => ['integer', 'min:1'],
-        ];
+        return array_merge(
+            $this->getDefault(),
+            $this->filterRules(['name', 'friendly_name']),
+        );
     }
 }

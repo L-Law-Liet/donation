@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('int_note')->nullable();
             $table->string('ext_note')->nullable();
             $table->string('ref')->nullable();
+            $table->string('status')->nullable();
+            $table->string('pledge_status')->nullable();
 
             $table->foreignId('reason_id')->nullable()->constrained()
                 ->cascadeOnUpdate()->nullOnDelete();
@@ -34,10 +36,12 @@ return new class extends Migration
                 ->cascadeOnUpdate()->nullOnDelete();
             $table->foreignId('card_id')->nullable()->constrained()
                 ->cascadeOnUpdate()->nullOnDelete();
+            $table->foreignId('transaction_id')->nullable()->constrained()
+                ->cascadeOnUpdate()->nullOnDelete();
             $table->foreignId('user_id')->constrained()
                 ->cascadeOnUpdate()->cascadeOnDelete();
             $table->softDeletes();
-$table->timestamps();
+            $table->timestamps();
         });
     }
 
