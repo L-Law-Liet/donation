@@ -12,6 +12,8 @@ class DonorObserver
         if (!$donor->locations) {
             $donor->locations = [];
         }
+        $donor->yid_fullname = implode(' ', [$donor->yid_name1, $donor->yid_name2]);
+        $donor->fullname = implode(' ', [$donor->eng_pre, $donor->eng_name1, $donor->eng_name2]);
     }
     /**
      * Handle the Donor "created" event.

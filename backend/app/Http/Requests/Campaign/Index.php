@@ -18,7 +18,6 @@ class Index extends IndexRequest
     {
         return array_merge(
             $this->getDefault(),
-            $this->filterRules(['name', 'friendly_name']),
         );
     }
 }

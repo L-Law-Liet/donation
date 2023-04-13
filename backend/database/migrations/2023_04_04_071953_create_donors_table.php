@@ -18,9 +18,11 @@ return new class extends Migration
             $table->string('yid_name2')->nullable();
             $table->string('yid_title1')->nullable();
             $table->string('yid_title2')->nullable();
+            $table->string('yid_fullname')->nullable();
             $table->string('eng_pre')->nullable();
             $table->string('eng_name1')->nullable();
             $table->string('eng_name2')->nullable();
+            $table->string('fullname')->nullable();
             $table->json('locations');
             $table->boolean('is_donor')->default(true);
 

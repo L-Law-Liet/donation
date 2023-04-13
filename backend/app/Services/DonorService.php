@@ -14,16 +14,29 @@ class DonorService extends ApiService
         return [
             'acc' => [['acc'], 'asc'],
             'fullname' => [['eng_name1', 'eng_name2'], 'asc'],
-            'family' => [['family'], 'asc'],
+            'family' => [['child_id', 'pair_id'], 'asc'],
             'phone' => [['phone_value'], 'asc'],
             'address' => [['address_street'], 'asc'],
             'email' => [['email_value'], 'asc'],
             '-acc' => [['acc'], 'desc'],
             '-fullname' => [['eng_name1', 'eng_name2'], 'desc'],
-            '-family' => [['family'], 'desc'],
+            '-family' => [['child_id', 'pair_id'], 'desc'],
             '-phone' => [['phone_value'], 'desc'],
             '-address' => [['address_street'], 'desc'],
             '-email' => [['email_value'], 'desc'],
+        ];
+    }
+
+    public static function LIKES(): array
+    {
+        return [
+            'acc' => 'acc',
+            'fullname' => 'fullname',
+            'yid_fullname' => 'yid_fullname',
+            'phone' => 'phone.value',
+            'email' => 'email.value',
+            'father' => 'child.fullname',
+            'father_law' => 'pair.fullname',
         ];
     }
 
@@ -38,23 +51,6 @@ class DonorService extends ApiService
     protected function collection(): string
     {
         return DonorCollection::class;
-    }
-
-    protected function preSortAggregate(): array
-    {
-        return [
-            [
-                ['address'], 'street'
-            ],
-            [
-                ['phone', 'email'], 'value'
-            ],
-        ];
-    }
-
-    protected function load(): array
-    {
-        return ['campaign', 'transactions'];
     }
 
     /**

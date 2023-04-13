@@ -21,6 +21,14 @@ class CampaignService extends ApiService
         ];
     }
 
+    public static function LIKES(): array
+    {
+        return [
+            'name' => 'name',
+            'friendly_name' => 'friendly_name',
+        ];
+    }
+
     protected function model(): string
     {
         return Campaign::class;

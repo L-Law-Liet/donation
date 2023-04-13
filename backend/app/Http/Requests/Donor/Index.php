@@ -19,15 +19,6 @@ class Index extends IndexRequest
     {
         $rules = array_merge(
             $this->getDefault(),
-            $this->filterRules([
-                'acc',
-                'fullname',
-                'fullname_yid',
-                'phone',
-                'email',
-                'father',
-                'father_law',
-            ]),
             [
                 'filter.tags' => ['array'],
                 'filter.tags.*' => ['exists:tags,title'],

@@ -14,6 +14,21 @@ class DonorCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return $this->collection->map(function ($rec) {
+            return [
+                'id' => $rec->id,
+                'acc' => $rec->acc,
+                'yid_fullname' => $rec->yid_fullname,
+                'fullname' => $rec->fullname,
+                'acc' => $rec->acc,
+                'acc' => $rec->acc,
+                'acc' => $rec->acc,
+                'acc' => $rec->acc,
+                'acc' => $rec->acc,
+                'acc' => $rec->acc,
+                'acc' => $rec->acc,
+                'acc' => $rec->acc,
+            ];
+        })->toArray();
     }
 }

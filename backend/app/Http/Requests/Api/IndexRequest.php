@@ -22,16 +22,20 @@ class IndexRequest extends ApiRequest
     protected function getDefault(): array
     {
         $arr = explode('\\', get_class($this));
+        $service = app('App\Services\\'.$arr[count($arr) - 2].'Service');
         $rules = [
             'sort' => [Rule::in(array_keys(
-                app('App\Services\\'.$arr[count($arr) - 2].'Service')::SORT()
+                $service::SORT()
             ))],
             'per_page' => ['integer', 'min:1'],
         ];
         if ($this->hasStatus()) {
             $rules['filter.status'] = [Rule::in(ApiService::STATUS())];
         }
-        return $rules;
+        return array_merge(
+            $rules,
+            $this->filterRules(array_keys($service::LIKES()))
+        );
     }
 
     protected function filterRules(array $cols): array

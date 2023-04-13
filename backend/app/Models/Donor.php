@@ -65,19 +65,19 @@ class Donor extends Model
     }
 
     /**
-     * @return HasMany
+     * @return HasOne
      */
-    public function phone(): HasMany
+    public function phone(): HasOne
     {
-        return $this->hasMany(Phone::class);
+        return $this->hasOne(Phone::class)->where('primary', true);
     }
 
     /**
-     * @return HasMany
+     * @return HasOne
      */
-    public function email(): HasMany
+    public function email(): HasOne
     {
-        return $this->hasMany(Email::class);
+        return $this->hasOne(Email::class)->where('primary', true);
     }
 
     /**
