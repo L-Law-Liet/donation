@@ -6,7 +6,7 @@ use App\Http\Requests\ApiRequest;
 use App\Services\ApiService;
 use Illuminate\Validation\Rule;
 
-class IndexRequest extends ApiRequest
+abstract class IndexRequest extends ApiRequest
 {
     /**
      * Get the validation rules that apply to the request.

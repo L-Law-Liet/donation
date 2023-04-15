@@ -11,23 +11,15 @@ trait WithSort
         return [];
     }
 
-    protected function preSort(): array
-    {
-        return [];
-    }
-
     protected function preSortAggregate(): array
     {
         return [];
     }
 
-    /**
-     * @return Builder
-     */
     protected function sorts(): Builder
     {
-        $q = $this->filters()
-            ->with($this->preSort());
+        $q = $this->filters();
+        $q = $this->preSort($q);
         foreach ($this->preSortAggregate() as $agg) {
             $q->withAggregate($agg[0], $agg[1]);
         }
@@ -37,6 +29,16 @@ trait WithSort
                 $q->orderBy($col, $dir);
             }
         }
+        return $this->afterSort($q);
+    }
+
+    protected function preSort(Builder $q): Builder
+    {
+        return $q;
+    }
+
+    protected function afterSort(Builder $q): Builder
+    {
         return $q;
     }
 }

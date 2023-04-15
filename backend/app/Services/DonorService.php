@@ -95,7 +95,7 @@ class DonorService extends ApiService
      * @param Builder $q
      * @return Builder
      */
-    protected function customFilter(Builder $q): Builder
+    protected function afterFilter(Builder $q): Builder
     {
         $tags = $this->getFilter()['tags'] ?? null;
         if ($tags) {

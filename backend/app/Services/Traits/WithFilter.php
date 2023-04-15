@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Schema;
 
 trait WithFilter
 {
-    /**
-     * @return string[]
-     */
     public static function STATUS(): array
     {
         return [
@@ -20,45 +17,30 @@ trait WithFilter
         ];
     }
 
-    /**
-     * @return array
-     */
     public static function LIKES(): array
     {
         return [];
     }
 
-    /**
-     * @return Builder
-     */
     protected function query(): Builder
     {
         return $this->model->query();
     }
 
-    /**
-     * @return array
-     */
-    protected function preFilter(): array
+    protected function preFilter(Builder $q): Builder
     {
-        return [];
+        return $q;
     }
 
-    /**
-     * @return array
-     */
     protected function preFilterAggregate(): array
     {
         return [];
     }
 
-    /**
-     * @return Builder
-     */
     protected function filters(): Builder
     {
-        $q = $this->query()->with($this->preFilter());
-
+        $q = $this->query();
+        $q = $this->preFilter($q);
         foreach ($this->preFilterAggregate() as $agg) {
             $q->withAggregate($agg[0], $agg[1]);
         }
@@ -70,22 +52,15 @@ trait WithFilter
             $q->where('user_id', request()->user()->id);
         }
         $q = $this->byStatus($q);
-        $q = $this->customFilter($q);
+        $q = $this->afterFilter($q);
         return $this->filterLike($q);
     }
 
-    /**
-     * @return bool
-     */
     protected function byUser(): bool
     {
         return true;
     }
 
-    /**
-     * @param Builder $q
-     * @return Builder
-     */
     private function byStatus(Builder $q): Builder
     {
         $filter = $this->getFilter();
@@ -100,10 +75,6 @@ trait WithFilter
         return $q;
     }
 
-    /**
-     * @param Builder $q
-     * @return Builder
-     */
     public function filterLike(Builder $q): Builder
     {
         $likes = array_intersect_key($this->getFilter(), static::LIKES());
@@ -119,11 +90,7 @@ trait WithFilter
         return $q;
     }
 
-    /**
-     * @param Builder $q
-     * @return Builder
-     */
-    protected function customFilter(Builder $q): Builder
+    protected function afterFilter(Builder $q): Builder
     {
         return $q;
     }

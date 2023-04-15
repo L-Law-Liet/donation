@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Services\Traits\WithParams;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class ApiService
@@ -17,8 +18,10 @@ abstract class ApiService
 
     public function all()
     {
+        $q = $this->sorts();
         $records = new ($this->collection())(
-            $this->sorts()->with($this->with())->paginate($this->params['per_page'] ?? null)
+            $q->with($this->with())
+                ->paginate($this->params['per_page'] ?? null)
         );
         return $records->response()->getData(true);
     }
@@ -31,21 +34,16 @@ abstract class ApiService
     public function show(string $id)
     {
         return new ($this->resource())(
-            $this->model->findOrFail($id)->load($this->load())
+            $this->model->findOrFail($id)
+                ->load($this->load())
         );
     }
 
-    /**
-     * @return array
-     */
     protected function with(): array
     {
         return [];
     }
 
-    /**
-     * @return array
-     */
     protected function load(): array
     {
         return [];
