@@ -10,27 +10,18 @@ use Illuminate\Validation\Rule;
 
 class Index extends IndexRequest
 {
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
-     */
-    public function rules(): array
+    protected function custom(): array
     {
-        $rules = array_merge(
-            $this->getDefault(),
-            [
-                'filter.tags' => ['array'],
-                'filter.tags.*' => ['exists:tags,id'],
-                'filter.fields' => ['array'],
+        return [
+            'filter.tags' => ['array'],
+            'filter.tags.*' => ['exists:tags,id'],
+            'filter.fields' => ['array'],
 //                'filter.fields.*.id' => ['exists:fields,id'],
-                'filter.fields.*.value' => ['string', 'max:255'],
-                'filter.fields.*.options' => ['array'],
-                'filter.fields.*.options.*' => ['exists:options,id'],
-                'filter.cities.*' => ['exists:addresses,city'],
-                'filter.zips.*' => ['exists:addresses,zip'],
-            ]
-        );
-        return $rules;
+            'filter.fields.*.value' => ['string', 'max:255'],
+            'filter.fields.*.options' => ['array'],
+            'filter.fields.*.options.*' => ['exists:options,id'],
+            'filter.cities.*' => ['exists:addresses,city'],
+            'filter.zips.*' => ['exists:addresses,zip'],
+        ];
     }
 }

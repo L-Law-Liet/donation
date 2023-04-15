@@ -10,14 +10,10 @@ use Illuminate\Validation\Rule;
 class Index extends IndexRequest
 {
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
+     * @return array
      */
-    public function rules(): array
+    public function custom(): array
     {
-        return array_merge(
-            $this->getDefault(),
-        );
+        return [];
     }
 }

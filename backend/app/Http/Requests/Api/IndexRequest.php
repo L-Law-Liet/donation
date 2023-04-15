@@ -15,7 +15,10 @@ class IndexRequest extends ApiRequest
      */
     public function rules(): array
     {
-        return $this->getDefault();
+        return array_merge(
+            $this->getDefault(),
+            $this->custom()
+        );
     }
 
 
@@ -51,4 +54,6 @@ class IndexRequest extends ApiRequest
     {
         return true;
     }
+
+    abstract protected function custom(): array;
 }
