@@ -21,11 +21,12 @@ class Index extends IndexRequest
             $this->getDefault(),
             [
                 'filter.tags' => ['array'],
-                'filter.tags.*' => ['exists:tags,title'],
+                'filter.tags.*' => ['exists:tags,id'],
                 'filter.fields' => ['array'],
-                'filter.fields.*.value' => ['exists:fields'],
+//                'filter.fields.*.id' => ['exists:fields,id'],
+                'filter.fields.*.value' => ['string', 'max:255'],
                 'filter.fields.*.options' => ['array'],
-                'filter.fields.*.options.*' => [new OptionExists],
+                'filter.fields.*.options.*' => ['exists:options,id'],
                 'filter.cities.*' => ['exists:addresses,city'],
                 'filter.zips.*' => ['exists:addresses,zip'],
             ]

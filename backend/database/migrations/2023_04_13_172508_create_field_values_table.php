@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fields', function (Blueprint $table) {
+        Schema::create('field_values', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('type');
+            $table->string('value');
+            $table->foreignId('field_id')->constrained()
+                ->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('donor_id')->constrained()
+                ->cascadeOnDelete()->cascadeOnUpdate();
             $table->softDeletes();
-$table->timestamps();
+            $table->timestamps();
         });
     }
 
@@ -25,6 +28,6 @@ $table->timestamps();
      */
     public function down(): void
     {
-        Schema::dropIfExists('fields');
+        Schema::dropIfExists('field_values');
     }
 };

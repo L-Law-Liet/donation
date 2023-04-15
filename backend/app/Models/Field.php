@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Field extends Model
@@ -21,11 +22,29 @@ class Field extends Model
         'options' => 'array',
     ];
 
-    /**
-     * @return BelongsTo
-     */
-    public function donor(): BelongsTo
+    public function scopeDropdown($q)
     {
-        return $this->belongsTo(Donor::class);
+        $q->where('type', self::TYPE_DROPDOWN);
+    }
+
+    public function scopeText($q)
+    {
+        $q->where('type', self::TYPE_TEXT);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function options(): HasMany
+    {
+        return $this->hasMany(Option::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function values(): HasMany
+    {
+        return $this->hasMany(FieldValue::class);
     }
 }

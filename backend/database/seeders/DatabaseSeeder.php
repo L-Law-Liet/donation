@@ -15,12 +15,15 @@ class DatabaseSeeder extends Seeder
          \App\Models\User::factory(1)->create();
          $this->call([
              CampaignSeeder::class,
+             FieldSeeder::class,
+             OptionSeeder::class,
+             TagSeeder::class,
              DonorSeeder::class,
              ReasonSeeder::class,
              LocationSeeder::class,
              SourceSeeder::class,
-             TagSeeder::class,
              TransactionSeeder::class,
+             FieldValueSeeder::class,
          ]);
     }
 }

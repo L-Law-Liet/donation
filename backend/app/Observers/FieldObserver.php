@@ -9,9 +9,6 @@ class FieldObserver
 
     public function creating(Field $field)
     {
-        if (!$field->options) {
-            $field->options = [];
-        }
     }
 
     /**

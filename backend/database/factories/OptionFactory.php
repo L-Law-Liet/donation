@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Field>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Option>
  */
-class FieldFactory extends Factory
+class OptionFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,8 +19,8 @@ class FieldFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->words(2, true),
-            'type' => fake()->randomElement([Field::TYPE_TEXT, Field::TYPE_DROPDOWN]),
+            'value' => Str::random(rand(4, 8)),
+            'field_id' => Field::dropdown()->inRandomOrder()->first()->id,
         ];
     }
 }

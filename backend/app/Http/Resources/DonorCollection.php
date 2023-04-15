@@ -20,14 +20,11 @@ class DonorCollection extends ResourceCollection
                 'acc' => $rec->acc,
                 'yid_fullname' => $rec->yid_fullname,
                 'fullname' => $rec->fullname,
-                'acc' => $rec->acc,
-                'acc' => $rec->acc,
-                'acc' => $rec->acc,
-                'acc' => $rec->acc,
-                'acc' => $rec->acc,
-                'acc' => $rec->acc,
-                'acc' => $rec->acc,
-                'acc' => $rec->acc,
+                'family' => $rec->whenLoaded('child')?->fullname ?? null,
+                'family_law' => $rec->whenLoaded('pair')?->fullname ?? null,
+                'phones' => $rec->whenLoaded('phones'),
+                'address' => $rec->whenLoaded('address'),
+                'emails' => $rec->whenLoaded('emails'),
             ];
         })->toArray();
     }

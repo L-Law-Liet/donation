@@ -31,7 +31,7 @@ trait WithFilter
     /**
      * @return Builder
      */
-    private function query(): Builder
+    protected function query(): Builder
     {
         return $this->model->query();
     }
@@ -63,13 +63,14 @@ trait WithFilter
             $q->withAggregate($agg[0], $agg[1]);
         }
 
-        if (!isset($this->params['filter'])) {
+        if (!count($this->getFilter())) {
             return $q;
         }
         if (Schema::hasColumn($this->model->getTable(), 'user_id') && $this->byUser()) {
             $q->where('user_id', request()->user()->id);
         }
         $q = $this->byStatus($q);
+        $q = $this->customFilter($q);
         return $this->filterLike($q);
     }
 
@@ -87,7 +88,7 @@ trait WithFilter
      */
     private function byStatus(Builder $q): Builder
     {
-        $filter = $this->params['filter'];
+        $filter = $this->getFilter();
         if (!isset($filter['status'])) {
             return $q;
         }
@@ -105,7 +106,7 @@ trait WithFilter
      */
     public function filterLike(Builder $q): Builder
     {
-        $likes = array_intersect_key($this->params['filter'], static::LIKES());
+        $likes = array_intersect_key($this->getFilter(), static::LIKES());
         foreach ($likes as $key => $val) {
             if (count([$rel, $col] = explode('.', static::LIKES()[$key])) > 1) {
                 $q->whereHas($rel, function ($query) use ($col, $val) {
@@ -115,6 +116,15 @@ trait WithFilter
                 $q->where(static::LIKES()[$key], 'like', "%$val%");
             }
         }
+        return $q;
+    }
+
+    /**
+     * @param Builder $q
+     * @return Builder
+     */
+    protected function customFilter(Builder $q): Builder
+    {
         return $q;
     }
 }
