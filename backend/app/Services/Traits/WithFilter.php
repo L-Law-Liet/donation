@@ -49,7 +49,7 @@ trait WithFilter
             return $q;
         }
         if (Schema::hasColumn($this->model->getTable(), 'user_id') && $this->byUser()) {
-            $q->where('user_id', request()->user()->id);
+            $q->where($this->model->getTable().'.user_id', request()->user()->id);
         }
         $q = $this->byStatus($q);
         $q = $this->afterFilter($q);
@@ -79,8 +79,9 @@ trait WithFilter
     {
         $likes = array_intersect_key($this->getFilter(), static::LIKES());
         foreach ($likes as $key => $val) {
-            if (count([$rel, $col] = explode('.', static::LIKES()[$key])) > 1) {
-                $q->whereHas($rel, function ($query) use ($col, $val) {
+            if (count($arr = explode('.', static::LIKES()[$key])) > 1) {
+                $col = $arr[1];
+                $q->whereHas($arr[0], function ($query) use ($col, $val) {
                     $query->where($col, 'like', "%$val%");
                 });
             } else {

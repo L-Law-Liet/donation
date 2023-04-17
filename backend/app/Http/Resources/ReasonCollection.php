@@ -7,13 +7,19 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ReasonCollection extends ResourceCollection
 {
-    /**
-     * Transform the resource collection into an array.
-     *
-     * @return array<int|string, mixed>
-     */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return $this->collection->map(function ($rec) {
+            return [
+                'id' => $rec->id,
+                'num' => $rec->num,
+                'name' => $rec->name,
+                'email' => $rec->email,
+                'home_phone' => $rec->home_phone,
+                'cell' => $rec->cell,
+                'goal' => $rec->goal,
+                'percentage' => $rec->percentage,
+            ];
+        })->toArray();
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Resources\ReasonCollection;
 use App\Http\Resources\ReasonResource;
 use App\Models\Reason;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 class ReasonService extends ApiService
 {
@@ -54,17 +55,27 @@ class ReasonService extends ApiService
         if (isset($filter)) {
             $q->where('campaign_id', $filter);
         }
-
-        $q->withSum('transactions as percentage', 'amount');
         $filter = $this->getFilter()['percentage_min']?? null;
         if (isset($filter)) {
-            $q->having('percentage', '>=', $filter);
+            $q->havingRaw('percentage >= ?', [$filter]);
         }
         $filter = $this->getFilter()['percentage_max']?? null;
         if (isset($filter)) {
-            $q->having('percentage', '<=', $filter);
+            $q->havingRaw('percentage <= ?', [$filter]);
         }
         return $q;
+    }
+    protected function preFilter(Builder $q): Builder
+    {
+        return $q->join('transactions', 'reasons.id', '=', 'transactions.reason_id')
+            ->select('reasons.*',
+                DB::raw('sum(transactions.amount) / reasons.goal * 100 as percentage'))
+            ->groupBy('reasons.id');
+    }
+
+    protected function load(): array
+    {
+        return ['campaign', 'reason', 'transactions'];
     }
 
     protected function model(): string
