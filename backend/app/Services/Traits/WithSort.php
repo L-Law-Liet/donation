@@ -6,9 +6,16 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait WithSort
 {
+    abstract protected static function COLS(): array;
+
     public static function SORT(): array
     {
-        return [];
+        $cols = [];
+        foreach (static::COLS() as $key => $val) {
+            $cols[$key] = [$val, 'asc'];
+            $cols["-$key"] = [$val, 'desc'];
+        }
+        return $cols;
     }
 
     protected function preSortAggregate(): array

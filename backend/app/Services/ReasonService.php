@@ -10,23 +10,16 @@ use Illuminate\Support\Facades\DB;
 
 class ReasonService extends ApiService
 {
-    public static function SORT(): array
+    public static function COLS(): array
     {
         return [
-            'num' => [['num'], 'asc'],
-            'name' => [['name'], 'asc'],
-            'email' => [['email'], 'asc'],
-            'home_phone' => [['home_phone'], 'asc'],
-            'cell' => [['cell'], 'asc'],
-            'goal' => [['goal'], 'asc'],
-            'percentage' => [['percentage'], 'asc'],
-            '-num' => [['num'], 'desc'],
-            '-name' => [['name'], 'desc'],
-            '-email' => [['email'], 'desc'],
-            '-home_phone' => [['home_phone'], 'desc'],
-            '-cell' => [['cell'], 'desc'],
-            '-goal' => [['goal'], 'desc'],
-            '-percentage' => [['percentage'], 'desc'],
+            'num' => ['num'],
+            'name' => ['name'],
+            'email' => ['email'],
+            'home_phone' => ['home_phone'],
+            'cell' => ['cell'],
+            'goal' => ['goal'],
+            'percentage' => ['percentage'],
         ];
     }
 

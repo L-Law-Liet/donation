@@ -10,21 +10,15 @@ use Illuminate\Support\Arr;
 
 class DonorService extends ApiService
 {
-    public static function SORT(): array
+    protected static function COLS(): array
     {
         return [
-            'acc' => [['acc'], 'asc'],
-            'fullname' => [['eng_name1', 'eng_name2'], 'asc'],
-            'family' => [['child_id', 'pair_id'], 'asc'],
-            'phone' => [['phone_value'], 'asc'],
-            'address' => [['address_street'], 'asc'],
-            'email' => [['email_value'], 'asc'],
-            '-acc' => [['acc'], 'desc'],
-            '-fullname' => [['eng_name1', 'eng_name2'], 'desc'],
-            '-family' => [['child_id', 'pair_id'], 'desc'],
-            '-phone' => [['phone_value'], 'desc'],
-            '-address' => [['address_street'], 'desc'],
-            '-email' => [['email_value'], 'desc'],
+            'acc' => ['acc'],
+            'fullname' => ['eng_name1', 'eng_name2'],
+            'family' => ['child_id', 'pair_id'],
+            'phone' => ['phone_value'],
+            'address' => ['address_street'],
+            'email' => ['email_value'],
         ];
     }
 

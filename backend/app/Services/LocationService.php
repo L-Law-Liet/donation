@@ -9,23 +9,16 @@ use Illuminate\Database\Eloquent\Builder;
 
 class LocationService extends ApiService
 {
-    public static function SORT(): array
+    public static function COLS(): array
     {
         return [
-            'eng_name' => [['eng_name'], 'asc'],
-            'nusach' => [['nusach'], 'asc'],
-            'address' => [['address'], 'asc'],
-            'rabbi' => [['rabbi'], 'asc'],
-            'type' => [['type'], 'asc'],
-            'short_name' => [['short_name'], 'asc'],
-            'phone' => [['phone'], 'asc'],
-            '-eng_name' => [['eng_name'], 'desc'],
-            '-nusach' => [['nusach'], 'desc'],
-            '-address' => [['address'], 'desc'],
-            '-rabbi' => [['rabbi'], 'desc'],
-            '-type' => [['type'], 'desc'],
-            '-short_name' => [['short_name'], 'desc'],
-            '-phone' => [['phone'], 'desc'],
+            'eng_name' => ['eng_name'],
+            'nusach' => ['nusach'],
+            'address' => ['address'],
+            'rabbi' => ['rabbi'],
+            'type' => ['type'],
+            'short_name' => ['short_name'],
+            'phone' => ['phone'],
         ];
     }
 

@@ -9,15 +9,12 @@ use Illuminate\Database\Eloquent\Builder;
 
 class CampaignService extends ApiService
 {
-    public static function SORT(): array
+    protected static function COLS(): array
     {
         return [
-            'num' => [['num'], 'asc'],
-            'name' => [['name'], 'asc'],
-            'friendly_name' => [['friendly_name'], 'asc'],
-            '-num' => [['num'], 'desc'],
-            '-name' => [['name'], 'desc'],
-            '-friendly_name' => [['friendly_name'], 'desc'],
+            'num' => ['num'],
+            'name' => ['name'],
+            'friendly_name' => ['friendly_name'],
         ];
     }
 
