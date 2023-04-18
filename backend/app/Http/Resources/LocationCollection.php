@@ -14,6 +14,18 @@ class LocationCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return $this->collection->map(function ($rec) {
+            return [
+                'id' => $rec->id,
+                'yid_name' => $rec->yid_name,
+                'eng_name' => $rec->eng_name,
+                'nusach' => $rec->nusach,
+                'type' => $rec->type,
+                'short_name' => $rec->short_name,
+                'address' => $rec->address,
+                'rabbi' => $rec->rabbi,
+                'phone' => $rec->phone,
+            ];
+        })->toArray();
     }
 }

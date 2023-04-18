@@ -3,19 +3,16 @@
 namespace App\Http\Requests\Location;
 
 use App\Http\Requests\Api\IndexRequest;
+use App\Models\Location;
+use Illuminate\Validation\Rule;
 
 class Index extends IndexRequest
 {
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
-     */
-    public function rules(): array
+
+    protected function custom(): array
     {
-
         return [
-
+            'filter.type' => Rule::in(Location::TYPES),
         ];
     }
 }
