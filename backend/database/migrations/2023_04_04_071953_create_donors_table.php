@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('eng_name1')->nullable();
             $table->string('eng_name2')->nullable();
             $table->string('fullname')->nullable();
+            $table->string('group')->nullable();
+            $table->string('class')->nullable();
             $table->json('locations');
             $table->boolean('is_donor')->default(true);
 
@@ -33,7 +35,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()
                 ->cascadeOnUpdate()->cascadeOnDelete();
             $table->softDeletes();
-$table->timestamps();
+            $table->timestamps();
         });
     }
 

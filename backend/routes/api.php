@@ -4,6 +4,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\CollectorController;
 use App\Http\Controllers\DonorController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\FieldController;
@@ -39,6 +40,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         'campaigns' => CampaignController::class,
         'cards' => CardController::class,
         'donors' => DonorController::class,
+        'collectors' => CollectorController::class,
         'emails' => EmailController::class,
         'fields' => FieldController::class,
         'locations' => LocationController::class,
