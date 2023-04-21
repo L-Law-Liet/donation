@@ -21,6 +21,7 @@ class CampaignCollection extends ResourceCollection
                 'name' => $rec->name,
                 'friendly_name' => $rec->friendly_name,
                 'num' => $rec->num,
+                'created_at' => $rec->created_at,
                 'campaigns' => new CampaignCollection($rec->campaigns),
             ];
         })->toArray();

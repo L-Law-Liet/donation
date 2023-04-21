@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('home_phone')->nullable();
             $table->string('cell')->nullable();
+            $table->string('url')->nullable();
             $table->unsignedDecimal('goal')->default(0);
 
             $table->foreignId('campaign_id')->nullable()->constrained()

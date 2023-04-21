@@ -20,6 +20,9 @@ class ReasonService extends ApiService
             'cell' => ['cell'],
             'goal' => ['goal'],
             'percentage' => ['percentage'],
+            'url' => ['url'],
+            'campaign' => ['campaign_name'],
+            'reason' => ['reason_name'],
         ];
     }
 
@@ -31,6 +34,14 @@ class ReasonService extends ApiService
             'email' => 'email',
             'home_phone' => 'home_phone',
             'cell' => 'cell',
+        ];
+    }
+    protected function preSortAggregate(): array
+    {
+        return [
+            [
+                ['campaign', 'reason'], 'name'
+            ],
         ];
     }
 

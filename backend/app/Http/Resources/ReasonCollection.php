@@ -18,7 +18,10 @@ class ReasonCollection extends ResourceCollection
                 'home_phone' => $rec->home_phone,
                 'cell' => $rec->cell,
                 'goal' => $rec->goal,
+                'url' => $rec->url,
                 'percentage' => $rec->percentage,
+                'campaign' => $rec->campaign_name,
+                'reason' => $rec->reason_name,
             ];
         })->toArray();
     }

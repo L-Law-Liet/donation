@@ -19,10 +19,11 @@ class FieldValueFactory extends Factory
      */
     public function definition(): array
     {
+        $donor = Donor::inRandomOrder()->first();
         return [
             'value' => Str::random(rand(4, 8)),
-            'field_id' => Field::text()->inRandomOrder()->first()->id,
-            'donor_id' => Donor::inRandomOrder()->first()->id,
+            'field_id' => Field::text()->whereNotIn('id', $donor->values()->pluck('field_id'))->inRandomOrder()->first()->id,
+            'donor_id' => $donor->id,
         ];
     }
 }

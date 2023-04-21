@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait WithSort
 {
+    protected static array $customSorts = [];
     abstract protected static function COLS(): array;
 
     public static function SORT(): array
@@ -30,8 +31,12 @@ trait WithSort
         foreach ($this->preSortAggregate() as $agg) {
             $q->withAggregate($agg[0], $agg[1]);
         }
-        if (isset($this->params['sort'])) {
-            [$cols, $dir] = static::SORT()[$this->params['sort']];
+        $sort = $this->params['sort'] ?? null;
+        if (isset($sort)) {
+            if (in_array(ltrim($sort, '-'), static::$customSorts)) {
+                return $this->customSort($q);
+            }
+            [$cols, $dir] = static::SORT()[$sort];
             foreach ($cols as $col) {
                 $q->orderBy($col, $dir);
             }
@@ -45,6 +50,11 @@ trait WithSort
     }
 
     protected function afterSort(Builder $q): Builder
+    {
+        return $q;
+    }
+
+    protected function customSort(Builder $q): Builder
     {
         return $q;
     }

@@ -15,6 +15,7 @@ class CampaignService extends ApiService
             'num' => ['num'],
             'name' => ['name'],
             'friendly_name' => ['friendly_name'],
+            'created_at' => ['created_at'],
         ];
     }
 
