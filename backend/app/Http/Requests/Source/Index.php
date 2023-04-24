@@ -3,19 +3,18 @@
 namespace App\Http\Requests\Source;
 
 use App\Http\Requests\Api\IndexRequest;
+use App\Models\Source;
+use Illuminate\Validation\Rule;
 
 class Index extends IndexRequest
 {
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
-     */
-    public function rules(): array
+    protected function custom(): array
     {
-
         return [
-            'gg' => ['required'],
+            'filter.device_types' => ['array'],
+            'filter.device_types.*' => [Rule::in(Source::DEVICE_TYPES)],
+            'filter.statuses' => ['array'],
+            'filter.statuses.*' => [Rule::in(Source::STATUSES)],
         ];
     }
 }

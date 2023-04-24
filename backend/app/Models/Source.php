@@ -14,6 +14,40 @@ class Source extends Model
 
     protected $guarded = [];
 
+    const STATUSES = [
+      'Not Activated' => 'Not Activated',
+      'Activated' => 'Activated',
+      'Expired' => 'Expired',
+      'De-Activated' => 'De-Activated',
+      'Changed Event' => 'Changed Event',
+      'Canceled' => 'Canceled',
+      'Returned' => 'Returned',
+      'Completed' => 'Completed',
+    ];
+
+    const DEVICE_TYPES = [
+        'All' => 'All',
+        'Donary Desktop' => 'Donary Desktop',
+        'Printer' => 'Printer',
+        'Print Server' => 'Print Server',
+        'Donary Phone' => 'Donary Phone',
+        'Payment Site' => 'Payment Site',
+        'Donary Mobile' => 'Donary Mobile',
+        'DRM' => 'DRM',
+        'Integrations' => 'Integrations',
+        'Scheduler' => 'Scheduler',
+        'Donary Donate+' => 'Donary Donate+',
+        'Donary Pay' => 'Donary Pay',
+        'Donary Donate' => 'Donary Donate',
+        'Donary Pocket' => 'Donary Pocket',
+        'Donary Dashboard' => 'Donary Dashboard',
+        'Rental Kiosk' => 'Rental Kiosk',
+        'Donary Event' => 'Donary Event',
+        'Imported' => 'Imported',
+        'Shul Kiosk' => 'Shul Kiosk',
+        'Matbia Site' => 'Matbia Site',
+    ];
+
 
     /**
      * @return BelongsTo

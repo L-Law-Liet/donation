@@ -91,6 +91,14 @@ class Transaction extends Model
     /**
      * @return BelongsTo
      */
+    public function source(): BelongsTo
+    {
+        return $this->belongsTo(Source::class, 'collector_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
     public function card(): BelongsTo
     {
         return $this->belongsTo(Card::class);

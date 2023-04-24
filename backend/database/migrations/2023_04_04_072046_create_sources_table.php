@@ -13,7 +13,21 @@ return new class extends Migration
     {
         Schema::create('sources', function (Blueprint $table) {
             $table->id();
+            $table->string('event')->nullable();
+            $table->string('product')->nullable();
             $table->string('device_name')->nullable();
+            $table->string('activation_code')->nullable();
+            $table->string('mac_address')->nullable();
+            $table->string('plan')->nullable();
+            $table->string('device_type')->nullable();
+            $table->string('status')->nullable();
+            $table->string('notes')->nullable();
+            $table->string('device_num')->nullable();
+            $table->string('sim_num')->nullable();
+            $table->dateTime('activated')->nullable();
+            $table->dateTime('deactivated')->nullable();
+            $table->string('organization')->nullable();
+            $table->string('version')->nullable();
             $table->date('date')->nullable();
             $table->string('pin')->nullable();
 
