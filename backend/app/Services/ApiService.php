@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Services\Traits\WithParams;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 abstract class ApiService
 {
@@ -26,9 +27,9 @@ abstract class ApiService
         return $records->response()->getData(true);
     }
 
-    public function store()
+    public function store(array $validated): Model
     {
-
+        return $this->model->create($validated);
     }
 
     public function show(string $id)

@@ -39,13 +39,9 @@ abstract class ApiController extends Controller
         return response()->json($this->service->all());
     }
 
-    /**
-     * @param StoreRequest $request
-     * @return void
-     */
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request): JsonResponse
     {
-
+        return response()->json($this->service->store($request->validated()));
     }
 
     /**
