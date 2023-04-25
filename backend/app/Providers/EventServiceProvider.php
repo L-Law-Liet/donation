@@ -5,10 +5,12 @@ namespace App\Providers;
 use App\Models\Campaign;
 use App\Models\Donor;
 use App\Models\Field;
+use App\Models\Location;
 use App\Models\Reason;
 use App\Observers\CampaignObserver;
 use App\Observers\DonorObserver;
 use App\Observers\FieldObserver;
+use App\Observers\LocationObserver;
 use App\Observers\ReasonObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -31,6 +33,7 @@ class EventServiceProvider extends ServiceProvider
     protected $observers = [
         Donor::class => [DonorObserver::class],
         Reason::class => [ReasonObserver::class],
+        Location::class => [LocationObserver::class],
         Field::class => [FieldObserver::class],
         Campaign::class => [CampaignObserver::class],
     ];
