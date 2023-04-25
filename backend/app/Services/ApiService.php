@@ -5,11 +5,15 @@ namespace App\Services;
 use App\Services\Traits\WithParams;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 
 abstract class ApiService
 {
     use WithParams;
+
+    protected $rels = [];
 
     public function __construct(protected Model $model) {}
 
@@ -29,7 +33,27 @@ abstract class ApiService
 
     public function store(array $validated): Model
     {
-        return $this->model->create($validated);
+        foreach ($validated as $key => $val) {
+            if (is_array($val)) {
+                $this->rels[$key] = $val;
+                unset($validated[$key]);
+            }
+        }
+        $model = $this->model->create($validated);
+        $this->createRels($model);
+        return $model;
+    }
+
+    protected function createRels(Model $model)
+    {
+        foreach ($this->rels as $key => $val) {
+            $rel = $model->{$key}();
+            if ($rel instanceof BelongsToMany) {
+                $rel->attach($val);
+            } elseif ($rel instanceof HasMany) {
+                $rel->createMany($val);
+            }
+        }
     }
 
     public function show(string $id)

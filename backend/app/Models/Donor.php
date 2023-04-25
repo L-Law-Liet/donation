@@ -20,10 +20,6 @@ class Donor extends Model
 
     protected $guarded = [];
 
-    protected $casts = [
-        'locations' => 'object',
-    ];
-
     /**
      * @param Builder $query
      * @return void
@@ -149,5 +145,21 @@ class Donor extends Model
     public function values(): HasMany
     {
         return $this->hasMany(FieldValue::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function donor_locations(): HasMany
+    {
+        return $this->hasMany(DonorLocation::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

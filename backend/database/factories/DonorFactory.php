@@ -32,16 +32,6 @@ class DonorFactory extends Factory
             'eng_name1' => fake()->firstName($gender),
             'eng_name2' => fake()->firstName($gender),
             'is_donor' => fake()->boolean(66),
-            'locations' => [
-                [
-                    'name' => Str::random(6),
-                    'address' => fake()->streetAddress,
-                    'city' => fake()->city,
-                    'state' => Address::stateAbbr(),
-                    'country' => fake()->country,
-                    'zip' => fake()->postcode,
-                ]
-            ],
             'child_id' => Donor::donor()->find(rand(1, 100))?->id,
             'pair_id' => Donor::donor()->find(rand(1, 100))?->id,
             'user_id' => User::first()->id,

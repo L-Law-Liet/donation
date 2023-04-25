@@ -10,7 +10,7 @@ class CampaignObserver
     public function creating(Campaign $campaign): void
     {
         $campaign->user()->associate(Auth::user());
-        $campaign->num = $campaign->user->campaigns()->count() + 1;
+        $campaign->num = $campaign->user?->campaigns()?->count() + 1;
     }
 
     /**

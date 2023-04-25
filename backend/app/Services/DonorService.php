@@ -123,6 +123,7 @@ class DonorService extends ApiService
             'tags',
             'cards',
             'transactions',
+            'donor_locations',
         ];
     }
 

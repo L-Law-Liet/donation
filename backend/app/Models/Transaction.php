@@ -119,4 +119,12 @@ class Transaction extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

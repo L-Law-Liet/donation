@@ -25,7 +25,6 @@ return new class extends Migration
             $table->string('fullname')->nullable();
             $table->string('group')->nullable();
             $table->string('class')->nullable();
-            $table->json('locations');
             $table->boolean('is_donor')->default(true);
 
             $table->foreignId('child_id')->nullable()->constrained('donors')

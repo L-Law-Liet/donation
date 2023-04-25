@@ -25,7 +25,6 @@ class DonorResource extends JsonResource
             'yid_title1' => $this->yid_title1,
             'yid_title2' => $this->yid_title2,
             'fullname' => $this->fullname,
-            'locations' => $this->locations,
             'family' => $this->whenLoaded('child')?->fullname ?? null,
             'family_law' => $this->whenLoaded('pair')?->fullname ?? null,
             'phones' => $this->whenLoaded('phones'),
@@ -42,6 +41,7 @@ class DonorResource extends JsonResource
             'tags' => $this->whenLoaded('tags'),
             'cards' => $this->whenLoaded('cards'),
             'transactions' => $this->whenLoaded('transactions'),
+            'donor_locations' => $this->whenLoaded('donor_locations'),
         ];
     }
 }

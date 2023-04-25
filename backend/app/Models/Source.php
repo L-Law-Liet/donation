@@ -80,4 +80,12 @@ class Source extends Model
     {
         return $this->belongsTo(Donor::class, 'collector_id');
     }
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

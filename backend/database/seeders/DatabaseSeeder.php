@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Auth;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,13 +13,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         \App\Models\User::factory(1)->create();
+         User::factory(2)->create();
+         Auth::login(User::first());
          $this->call([
              CampaignSeeder::class,
              FieldSeeder::class,
              OptionSeeder::class,
              TagSeeder::class,
              DonorSeeder::class,
+             DonorLocationSeeder::class,
              ReasonSeeder::class,
              LocationSeeder::class,
              SourceSeeder::class,
