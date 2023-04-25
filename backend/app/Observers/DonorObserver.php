@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 
 class DonorObserver
 {
-
     public function creating(Donor $donor)
     {
         $donor->user()->associate(Auth::user());

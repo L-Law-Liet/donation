@@ -48,7 +48,7 @@ class Store extends StoreRequest
             'phones.*.primary' => ['boolean'],
             'emails' => ['array'],
             'emails.*.type' => ['required', 'string', 'max:255'],
-            'emails.*.value' => ['required', 'string', 'email:filter', 'max:255'],
+            'emails.*.value' => ['required', 'string', 'email', 'max:255'],
             'emails.*.primary' => ['boolean'],
             'tags' => ['array'],
             'tags.*' => ['exists:tags,id'],

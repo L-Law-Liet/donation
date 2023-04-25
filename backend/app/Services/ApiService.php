@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
 abstract class ApiService
@@ -31,7 +32,7 @@ abstract class ApiService
         return $records->response()->getData(true);
     }
 
-    public function store(array $validated): Model
+    public function store(array $validated)
     {
         foreach ($validated as $key => $val) {
             if (is_array($val)) {
@@ -41,7 +42,9 @@ abstract class ApiService
         }
         $model = $this->model->create($validated);
         $this->createRels($model);
-        return $model;
+        return new ($this->resource())(
+            $model->load($this->load())
+        );
     }
 
     protected function createRels(Model $model)
