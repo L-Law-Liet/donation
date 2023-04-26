@@ -12,6 +12,7 @@ class Email extends Model
     use HasFactory;
     use SoftDeletes;
 
+    const TYPE_DEFAULT = 'DEFAULT';
     const TYPE_HOME = 'HOME';
     const TYPE_WORK = 'WORK';
 

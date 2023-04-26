@@ -3,12 +3,14 @@
 namespace App\Observers;
 
 use App\Models\Field;
+use Illuminate\Support\Facades\Auth;
 
 class FieldObserver
 {
 
     public function creating(Field $field)
     {
+        $field->user()->associate(Auth::user());
     }
 
     /**

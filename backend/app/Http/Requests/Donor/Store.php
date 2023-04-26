@@ -17,12 +17,12 @@ class Store extends StoreRequest
     public function rules(): array
     {
         return [
-            'eng_name1' => ['required', 'string', 'max:255'],
             'yid_name1' => ['string', 'max:255'],
             'yid_name2' => ['string', 'max:255'],
             'yid_title1' => ['string', 'max:255'],
             'yid_title2' => ['string', 'max:255'],
             'eng_pre' => ['string', 'max:255'],
+            'eng_name1' => ['required', 'string', 'max:255'],
             'eng_name2' => ['string', 'max:255'],
             'values' => ['array'],
             'values.*.field_id' => [

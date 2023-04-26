@@ -10,6 +10,9 @@ class DonorObserver
     public function creating(Donor $donor)
     {
         $donor->user()->associate(Auth::user());
+        if (is_null($donor->acc)) {
+            $donor->acc = time();
+        }
         $donor->yid_fullname = implode(' ', [$donor->yid_name1, $donor->yid_name2]);
         $donor->fullname = implode(' ', [$donor->eng_pre, $donor->eng_name1, $donor->eng_name2]);
     }

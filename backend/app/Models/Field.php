@@ -47,4 +47,9 @@ class Field extends Model
     {
         return $this->hasMany(FieldValue::class);
     }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
